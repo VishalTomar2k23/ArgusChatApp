@@ -47,7 +47,7 @@
     flex-direction: column;
     flex-direction: column-reverse;
     padding: 10px 20px;
-    overflow: scroll;
+    overflow-y: auto;
     background-image: url(/src/assets/images/Back.jpg) image-set(width 20px);
 }
 #container #body .message {
@@ -132,4 +132,16 @@
 
 #container #footer #smileyIcon {
     flex-basis: 50px;
+}
+
+#chatForm {
+    margin-bottom: 0;
+}
+.replymsg{
+    background-color: rgb(220, 247, 232);
+    padding: 10px;
+    border-radius: 5px;
+}
+.overflowrap{
+    overflow-wrap: anywhere;
 }

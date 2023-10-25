@@ -23,12 +23,6 @@ export class ChatService {
   // Send Messages 
   sendMessage(userObj:any,otherObj:any,messageObj:string,replyedto :any,Type:string):Observable<any>{
 
-    // const formData = new FormData();
-    // formData.append("SenderId", userObj);
-    // formData.append("ReceiverId", userObj);
-    // formData.append("Content", userObj);
-    // formData.append("SenderId", userObj);
-
     return this.http.post<any>(`${this.baseUrl}/Addmsg`,{
       SenderId : userObj,
       ReceiverId : otherObj,
@@ -37,7 +31,19 @@ export class ChatService {
       Type : Type
     });
   }
-
+ 
+  sendReplyMessage(content:string,senderId:string,receiverId:string,type: string,replyedto: number,messageId: number){
+    // const params = new HttpParams()
+    //   .set('messageId', messageId)
+    return this.http.post<any>(`${this.baseUrl}/Addmsg`,{
+      SenderId : senderId,
+      ReceiverId : receiverId,
+      Content : content,
+      ReplyedToId : replyedto,
+      Type : type,
+    },)
+  }
+  
   // Send File Messages 
   sendFileMessages(formData :FormData): Observable<any>{
       return this.http.post<any>(`${this.baseUrl}/AddFilemsg`,formData);

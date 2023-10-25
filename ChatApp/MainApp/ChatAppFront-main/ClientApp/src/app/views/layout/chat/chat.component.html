@@ -29,16 +29,28 @@
       </audio>
       
     <!---- Since there are many types of data so depending on type of message we will implement this accordingly. -->
-      <div *ngIf="message.type === 'Null'" class="messageContent" (dblclick)="method2()">
+    <div class = "replymsg overflowrap" *ngIf="message.replyedToId != 0 ">{{(message.replyedToId)}} </div>
+    <div *ngIf="message.type === 'Null'" class="messageContent" (dblclick)="ToggleReplyMsg(message)">
         {{ message.content }}
         <div class="time">{{recentChatDate(message.dateTime) }}</div>
         <div class="reply">
           <button style="font-size:20px ; background: transparent; border: none; position:left;"> <i
-              class="fa fa-mail-reply"></i></button>
+              class="fa fa-mail-reply" (click)="ToggleReplyMsg(message)"></i></button>
         </div>
       </div>
     </div>
+    
   </div>
+  <!-- To show the replymessage details if we have selected a message. -->
+  <div class="search-form flex-grow mr-2 margin-to-left-right " style="width: 90%; align-items: center; " [hidden]="!IsReplying">
+    <div class="input-group">
+      <p type="text" class="form-control rounded-pill setColor" id="chatForm" readonly><span class="mdi mdi-reply"></span>  {{messageInput.content | slice:0:40}}{{ messageInput.content.length > 40 ? '...' : '' }}</p>
+      <span class="close-button onhoverr" aria-label="Close alert" data-close (click)="CloseRplyMsg()" >
+        <span aria-hidden="true">&times;</span>
+      </span>
+    </div>
+  </div>
+
   <div id="footer">
       <!-- <div id="smileyIcon" >
           <img
